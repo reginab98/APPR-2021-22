@@ -94,3 +94,10 @@ Te podatke lahko nastavite tudi z `git config --global` v konzoli
 (vendar bodo veljale le v trenutni seji).
 
 
+
+
+
+
+
+
+
