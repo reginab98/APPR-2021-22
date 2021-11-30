@@ -1,10 +1,10 @@
 # Analiza potovanj iz Slovenije
 Regina Blagotinšek
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
+Repozitorij z gradivi pri predmetu APPR v študijskem letu 2021/22
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2020-21/master?urlpath=shiny/APPR-2020-21/projekt.Rmd) Shiny
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2020-21/master?urlpath=rstudio) RStudio
+* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/master?urlpath=shiny/APPR-2021-22/projekt.Rmd) Shiny
+* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/master?urlpath=rstudio) RStudio
 
 ## Tematika
 
