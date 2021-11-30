@@ -10,16 +10,51 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2021/22
 
 V projektni nalogi bom analizirala potovanja iz Slovenije. Osredotočila se bom na potovanja z letali. Najprej me bo zanimalo, kam letijo potniška letala z ljubljanskega letališča. Ker je ljubljansko letališče manjše, to pogosto niso podatki o končni destinaciji. Vseeno bom pogledala, kako se skozi čas spreminja število potnikov na različne destinacije v zadnjih desetih letih. Podatke bom za nekaj let analizirala tudi na mesečni ravni in skušala najti kakšne podobnosti, kot na primer, v katerem mesecu so potovanja v določeno državo najpogostejša. Preučila bom tudi, ali imajo povprečne cene letalskih kart kakšen vpliv na število potnikov. Podatke o cenah kart so sicer za ZDA, vendar bom morda vseeno našla kakšno povezavo. Potovanja z letali iz Slovenije bom prikazala tudi na zemljevidu sveta. Na koncu bom nekoliko analizirala tudi letalski potniški promet v Evropski uniji in sicer tako, da bom preučila, koliko kilometrov naredijo potniška letala preko posameznih držav EU v razmerju s površinami njihovih ozemelj.
 
-## Opis podatkovnih virov
+## Opis podatkovnih virov in zasnova podatkovnega modela
+
+TABELA 1:
+*
+*
+*
+*
+*
+*
+*
+
+TABELA 2:
+*
+*
+*
+*
+*
+*
+*
+TABELA 3:
+*
+*
+*
+*
+*
+*
+*
+
+TABELA 4: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijoni potniških km
+* oblika: CSV
+* stolpci: evropske države
+* vrstice: leta
+* vir: https://ec.europa.eu/eurostat/databrowser/view/avia_tppa/default/table?lang=en
+
 Uporabljala bom podatke s štirih spletnih strani:
 
 * SURS:
 
 Oblika: CSV
 
-* eurostat:
+* eurostat: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijon potniških km
 
 Oblika: CSV
+Tabela: https://ec.europa.eu/eurostat/databrowser/view/avia_tppa/default/table?lang=en
+
 
 * Wikipedija
 
@@ -30,6 +65,16 @@ Oblika:HTML
 Oblika: CSV
 
 ## Zasnova podatkovnega modela
+
+Tabele:
+1.
+2.
+3.
+4.
+5.
+
+
+https://ec.europa.eu/eurostat/databrowser/view/avia_tppa/default/table?lang=en
 
 ## Plan dela 
 
