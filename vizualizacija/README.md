@@ -5,3 +5,4 @@ projekta).
 
 
 a dela github
+jesss dela
