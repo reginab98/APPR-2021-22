@@ -8,6 +8,19 @@ library(readr)
 library(dplyr)
 library(tibble)
 
+library(readxl)
+library(methods)
+library(dplyr)
+library(ggplot2)
+library(ggmap)
+library(data.table)
+library(rgeos)
+library(mosaic)
+library(rgdal)
+library(maptools)
+library(tmap)
+source("lib/uvozi.zemljevid.r",encoding="UTF-8")
+
 options(gsubfn.engine="R")
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.

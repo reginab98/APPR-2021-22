@@ -2,7 +2,15 @@
 
 sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
-#UVOZ POVRšIN DRžAV EVROPSKE UNIJE Z WIKIPEDIJE
+
+# UVOZ CEN LETALSKIH KART Z BTS.GOV
+ 
+cene <- read_xlsx("podatki/cene letalskih kart.xlsx", skip=4)
+names(cene) <- c("leto", "povpr_cena_realna", "spr_prejsnje_leto", "spr_1995", "povpr_cena_nominalna", 6:7)
+cene=cene[ -c(29:31), ] #odstranitev zadnjih treh vrstic
+
+
+# UVOZ POVRšIN DRžAV EVROPSKE UNIJE Z WIKIPEDIJE
 
 uvozi.povrsine <- function() {
   link <- "https://en.wikipedia.org/wiki/European_Union"
@@ -30,40 +38,8 @@ uvozi.povrsine <- function() {
   return(povrsine)
 }
 
-#UVOZ CEN LETALSKIH KART Z BTS.GOV
 
-uvozi.cene <- function() {
-  cene <- read_csv2("podatki/cene.csv", col_names=c("leto", "povpr_cena", 1:25),
-                    locale=locale(encoding="Windows-1250"), skip=5)
-  cene$"1" <- NULL   #vseh teh stolpcev ne potrebujem
-  cene$"2" <- NULL
-  cene$"3" <- NULL
-  cene$"4" <- NULL
-  cene$"5" <- NULL
-  cene$"6" <- NULL
-  cene$"7" <- NULL
-  cene$"8" <- NULL
-  cene$"9" <- NULL
-  cene$"10" <- NULL
-  cene$"11" <- NULL
-  cene$"12" <- NULL
-  cene$"13" <- NULL
-  cene$"14" <- NULL
-  cene$"15" <- NULL
-  cene$"16" <- NULL
-  cene$"17" <- NULL
-  cene$"18" <- NULL
-  cene$"19" <- NULL
-  cene$"20" <- NULL
-  cene$"21" <- NULL
-  cene$"22" <- NULL
-  cene$"23" <- NULL
-  cene$"24" <- NULL
-  cene$"25" <- NULL
-  cene=cene[ -c(28:30), ] #odstranitev zadnjih treh vrstic
-  return(cene)
-}
-
-#Prikaz spreminjanja cen
-spr_cen <- plot(cene$leto, cene$povpr_cena, main = "Spreminjanje cene povprečne povratne letalske vozovnice za lete znotraj ZDA", xlab="Leto", ylab="Povprečna cena [$]", type="l", col="blue")
+# 
+# #Prikaz spreminjanja cen
+# spr_cen <- plot(cene$leto, cene$povpr_cena, main = "Spreminjanje cene povprečne povratne letalske vozovnice za lete znotraj ZDA", xlab="Leto", ylab="Povprečna cena [$]", type="l", col="blue")
 
