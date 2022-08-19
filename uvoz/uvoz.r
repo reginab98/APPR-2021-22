@@ -5,6 +5,8 @@ nastavitve <- function(){sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 # UVOZ ODHODOV LETAL PO DRŽAVAH, mesečno
 
+ponovni test
+
 
              
 #UVOZ POVRšIN DRžAV EVROPSKE UNIJE Z WIKIPEDIJE
