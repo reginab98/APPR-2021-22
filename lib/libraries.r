@@ -8,6 +8,12 @@ library(readr)
 library(dplyr)
 library(tibble)
 
+library(XML)
+library(rvest)
+library(stringr)
+
+library(digest)
+
 library(readxl)
 library(methods)
 library(dplyr)
