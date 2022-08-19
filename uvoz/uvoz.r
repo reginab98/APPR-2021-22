@@ -1,14 +1,7 @@
 # 2. faza: Uvoz podatkov
 
-nastavitve <- function(){sl <- locale("sl", decimal_mark=",", grouping_mark=".")}
+sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
-
-# UVOZ ODHODOV LETAL PO DRŽAVAH, mesečno
-
-ponovni test
-
-
-             
 #UVOZ POVRšIN DRžAV EVROPSKE UNIJE Z WIKIPEDIJE
 
 uvozi.povrsine <- function() {
@@ -36,7 +29,6 @@ uvozi.povrsine <- function() {
   povrsine$MEP <- NULL
   return(povrsine)
 }
-
 
 #UVOZ CEN LETALSKIH KART Z BTS.GOV
 
