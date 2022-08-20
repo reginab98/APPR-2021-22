@@ -6,7 +6,9 @@ library(tmap)
 library(shiny)
 library(readr)
 library(dplyr)
-library(tibble)
+library
+
+library(xml2)
 
 library(XML)
 library(rvest)
