@@ -12,31 +12,25 @@ V projektni nalogi bom analizirala potovanja iz Slovenije. Osredotočila se bom 
 
 ## Opis podatkovnih virov in zasnova podatkovnega modela
 
-TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, letno
-* oblika CSV
-* vrstice: leta
-* stolpci: države
-* vir: https://pxweb.stat.si/SiStatData/pxweb/sl/Data/-/2221901S.px
-
-TABELA 2: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
+TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
 * oblika CSV
 * vrstice: meseci za nekaj let
 * stolpci: države
 * vir: https://pxweb.stat.si/SiStatData/pxweb/sl/Data/-/2221901S.px
 
-TABELA 3: Povprečne cene letalskih kart
+TABELA 2: Povprečne cene letalskih kart
 * oblika CSV
 * vrstice: leta
 * stolpci: povprečne cene, spremembe glede na prejšnje leto, spremembe glede na začetno leto (1995)
 * vir: https://www.bts.gov/content/annual-us-domestic-average-itinerary-fare-current-and-constant-dollars
 
-TABELA 4: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijoni potniških km
+TABELA 3: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijoni potniških km
 * oblika: CSV
 * stolpci: evropske države
 * vrstice: leta
 * vir: https://ec.europa.eu/eurostat/databrowser/view/avia_tppa/default/table?lang=en
 
-TABELA 5: Površine evropskih držav
+TABELA 4: Površine evropskih držav
 * oblika HTML
 * vrstice: države
 * stolpci: površine držav
