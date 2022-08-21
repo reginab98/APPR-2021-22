@@ -1,10 +1,11 @@
 # 3. faza: Vizualizacija podatkov
 
 #Priprava Tabele 1 za vizualizacijo
-
+odhodi <- filter(odhodi, potniki != "-") # odstranitev vrstic, kjer ni podatka
+odhodi$potniki <- as.numeric(odhodi$potniki)
 dejanski_odhodi <- filter(odhodi, potniki != 0) # odstranitev držav, kamor ni letelo nobeno letalo
+dejanski_odhodi <- filter(dejanski_odhodi, potniki != "-") # odstranitev vrstic, kjer ni podatka
 odhodi_na_mesec <- filter(dejanski_odhodi, drzava == "Države prihoda/odhoda letal - SKUPAJ")
-odhodi_na_mesec$potniki <- as.numeric(odhodi_na_mesec$potniki)
 
 # Vsota po mesecih, da nastane tabela po letih
 
@@ -19,9 +20,22 @@ colnames(na_leto) <- c("leto", "potniki")
 options(scipen=5) #da ne bo znanstvenega zapisa na grafih
 graf1 <- plot(na_leto$leto, na_leto$potniki, main = "Odhodi potnikov z Brnika na leto", xlab = "Leto", ylab = "Število potnikov", type="l", col="blue")
 
+# Vsota po državah skozi vsa leta
+
+brez_skupaj <- filter(dejanski_odhodi, drzava != "Države prihoda/odhoda letal - SKUPAJ")
+
+po_drzavah <- aggregate(x = brez_skupaj$potniki,
+                       by = list(brez_skupaj$drzava),
+                       FUN = sum)
+colnames(po_drzavah) <- c("drzava", "potniki")
 
 
 
+# GRAF 2: ODHODI POTNIKOV Z BRNIKA V DRŽAVE SKOZI VSA LETA
+#na tem grafu bo prikazanih 10 držav, kamor je letelo največ potnikov s stolpičnim diagramom
+#tukaj bo tudi zemljevid sveta, drzave kamor leti več potnikov bojo temnejše ali kaj takega
+
+#izbira parih držav, kjer bi predvidevala sezonskost, npr Grčija (poleti več letov), Egipt (kdaj je sezona), Rusija(kdaj je premraz), lahko pa tudi kakšno od top držav, če bo mogoče tam kakšna sezonskost
 
 
 # #Prikaz spreminjanja cen
