@@ -6,9 +6,15 @@ source("lib/libraries.r", encoding="UTF-8") #kaj je to?
 # TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
 
 odhodi <- read_csv2("podatki/odhodi letal mesecno.csv", na="-", locale=locale(encoding="Windows-1250"))
-odhodi <- separate(odhodi, col=1, into= c("mesec", "prihod/odhod", "drzava prihoda/odhoda", "potniki"), sep=";" ) #ločitev na stolpce, ker je bil samo en ločen z ;
+odhodi <- separate(odhodi, col=1, into= c("mesec1", "prihod/odhod", "drzava", "potniki"), sep=";" ) #ločitev na stolpce, ker je bil samo en ločen z ;
 odhodi$`prihod/odhod` <- NULL   #nepotreben stolpec, ker so vsi podatki za odhode
 odhodi <- odhodi[-c(1),] #izbris prve vrstice na ta način, ker skip=1 na zacetku pokvari vse
+razdeljen_prvi_stolpec <- str_split_fixed(odhodi$mesec1, pattern = "M", 2)
+stolpca_leto_mesec <- as.data.frame(razdeljen_prvi_stolpec)
+odhodi$mesec1 <- NULL   #tega stran, dodala bom razclenjenega
+odhodi <- bind_cols(stolpca_leto_mesec, odhodi)
+names(odhodi)[1] <- "leto"
+names(odhodi)[2] <- "mesec"
 
 # TABELA 2: Povprečne cene letalskih kart
  
