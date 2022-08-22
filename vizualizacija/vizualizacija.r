@@ -121,6 +121,20 @@ zemljevid1 <- ggplot(svet, aes(x = long, y = lat, group = group)) +
         rect = element_blank())
 zemljevid1
 
+
+# GRAF 2: Število potnikov po državah destinacijah
+drzave_stolpci <- razvrscene_drzave
+colnames(drzave_stolpci) = c("Država", "Število potnikov")
+rownames(drzave_stolpci)<-1:nrow(drzave_stolpci)
+drzave_stolpci <- drzave_stolpci[-c(16:69),]
+graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`)) +
+  geom_bar(stat="identity", fill = "blue")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
+        axis.title.x = element_blank(),
+        panel.grid.major.x = element_blank())+
+  ggtitle("Število potnikov z Brnika v 10 najpogostejših držav med 2004 in 2021")
+graf2
+
 #izbira parih držav, kjer bi predvidevala sezonskost, npr Grčija (poleti več letov), Egipt (kdaj je sezona), Rusija(kdaj je premraz), lahko pa tudi kakšno od top držav, če bo mogoče tam kakšna sezonskost
 
 
