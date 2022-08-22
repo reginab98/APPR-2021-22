@@ -55,3 +55,4 @@ povrsine$prebivalci <- NULL
 povrsine$gostota <- NULL
 povrsine$MEP <- NULL
 povrsine=povrsine[ -c(28), ] #odstranitev zadnje vrstice
+
