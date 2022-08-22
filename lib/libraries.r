@@ -7,6 +7,13 @@ library(shiny)
 library(readr)
 library(dplyr)
 
+install.packages("extrafont")
+library(extrafont)
+loadfonts(device = "win")
+
+
+
+
 library(xml2)
 
 library(XML)

@@ -15,11 +15,21 @@ na_leto <- aggregate(x = odhodi_na_mesec$potniki,
                      FUN = sum)
 na_leto <- na_leto[-c(19),] #ker so podatki samo za pol leta 2022
 colnames(na_leto) <- c("leto", "potniki")
-
+na_leto <- as.data.frame(na_leto)
 # GRAF 1: ODHODI POTNIKOV Z BRNIKA NA LETO OD 2004 DO 2021
 
 options(scipen=5) #da ne bo znanstvenega zapisa na grafih
-graf1 <- plot(na_leto$leto, na_leto$potniki, main = "Odhodi potnikov z Brnika na leto", xlab = "Leto", ylab = "Število potnikov", type="l", col="blue")
+# graf1 <- plot(na_leto$leto, na_leto$potniki, main = "Odhodi potnikov z Brnika na leto", xlab = "Leto", ylab = "Število potnikov", type="l", col="blue")
+# na_leto$potniki <- as.numeric(na_leto$potniki)
+
+graf1 <- ggplot(na_leto, aes(x=leto, y=potniki)) +
+  geom_line(color="blue", size=2)+
+  theme(axis.title.x = element_text("Leto"),
+         axis.title.y = element_text("Število potnikov"),
+         panel.grid.major.x = element_blank())+
+  ggtitle("Odhodi potnikov z Brnika na leto")
+graf1
+
 
 # Vsota po državah skozi vsa leta
 
@@ -226,7 +236,47 @@ graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`povprecje`), y=`povprecje`)
   ggtitle("Gostota letalskega potniškega prometa nad državami Evropske unije")
 graf3
                                                             
-# število potnikov vs. cene kart
+# GRAF 4: CENE LETALSKIH KART
+
+graf4 <- plot(cene$leto, cene$povpr_cena_realna, main = "Spreminjanje cene povprečne povratne letalske vozovnice za lete znotraj ZDA", xlab="Leto", ylab="Povprečna cena [$]", type="l", col="blue")
+
+
+cene1 <- cene[-c(1:9),]
+
+# GRAF 4: ŠTEVILO POTNIKOV IN CENE KART MED 2004 IN 2021
+cene1 <- cene[-c(1:9),]
+cene1 <- cene1[-c(19),]
+
+
+podatki_cene_potniki <- round(data.frame(leto=2004:2021,            #TO VSE NE BO OKEJ, KER SE NE DA SHRANIT KOT GRAF4, RAJSI Z GGPLOT2
+                       potniki_1 = na_leto$potniki,
+                       cene_2 = cene1$povpr_cena_realna))
+par(mar = c(5, 4, 4, 4) + 0.3)
+plot(podatki_cene_potniki$leto,
+     podatki_cene_potniki$potniki_1,
+     type = "l",
+     col = 2,
+     ylim = c(0, 950000),
+     xlab = "Leto",
+     ylab = "Število potnikov",
+     main = "Primerjava števila potnikov in cen kart med 2004 in 2021")
+par(new = TRUE)
+plot(podatki_cene_potniki$leto,
+     podatki_cene_potniki$cene_2,
+     type = "l",
+     col = 4,
+     axes = FALSE,
+     xlab = "", 
+     ylab = "")
+axis(side = 4, at = pretty(range(podatki_cene_potniki$cene_2)))
+mtext("Povprečna cena letalske karte", side = 4, line = 3)
+
+
+# lines(podatki_cene_potniki$leto,
+#       podatki_cene_potniki$cene_2,
+#       type = "l",
+#       ylim = c(0, 600),
+#       col = 3)
 
 
 #analiza potovanj v grčijo - predvidevam sezonskost, ali je opazna. napoved letov v grčijo za eno leto naprej (NAPREDNA ANALIZA)
