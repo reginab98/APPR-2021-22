@@ -44,7 +44,7 @@ for (col in c("povrsina", "prebivalci", "gostota")) {
     povrsine[[col]] <- parse_number(povrsine[[col]], locale=sl)  #stolpec gledamo kot seznam [[]] in zamenjamo mankajoce z na, na ostalih pa uporabimo sl
   }
 }
-for (i in 1:ncol(povrsine)) {         #kaj sem to naredila? od lani, ugotovi!
+for (i in 1:ncol(povrsine)) {         #kaj sem to naredila? od lani, ugotovi! nastavitev utf-8 da ni problemov s čji
   if (is.character(povrsine[[i]])) {
     Encoding(povrsine[[i]]) <- "UTF-8"
   }
@@ -55,4 +55,10 @@ povrsine$prebivalci <- NULL
 povrsine$gostota <- NULL
 povrsine$MEP <- NULL
 povrsine=povrsine[ -c(28), ] #odstranitev zadnje vrstice
+razdeljen_drugi_stolpec <- str_split_fixed(povrsine$povrsina, pattern = "/", 2)
+stolpca_povrsin <- as.data.frame(razdeljen_drugi_stolpec)
+stolpca_povrsin$V2 <- NULL
+colnames(stolpca_povrsin) = "povrsina_km2"
+povrsine$povrsina <- NULL
+povrsine <- bind_cols(povrsine, stolpca_povrsin)
 
