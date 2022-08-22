@@ -1,6 +1,7 @@
 # 3. faza: Vizualizacija podatkov
 
 #Priprava Tabele 1 za vizualizacijo
+
 odhodi <- filter(odhodi, potniki != "-") # odstranitev vrstic, kjer ni podatka
 odhodi$potniki <- as.numeric(odhodi$potniki)
 dejanski_odhodi <- filter(odhodi, potniki != 0) # odstranitev držav, kamor ni letelo nobeno letalo
@@ -30,7 +31,7 @@ colnames(po_drzavah) <- c("drzava", "potniki")
 
 # Razvrstitev držav po številu potnikov
 
-razvrscene_drzave <- po_drzavah[order(po_drzavah$potniki, decreasing = TRUE),]
+razvrscene_drzave <- po_drzavah[order(po_drzavah$potniki, decreasing = TRUE),] #ni pomagalo, ker ggplot2 vseeno narise po abecedi
 
 # ZEMLJEVID 1: ODHODI POTNIKOV Z BRNIKA V DRŽAVE SKOZI VSA LETA
 
@@ -107,7 +108,6 @@ slovar <- c("Albanija"="Albania",
             "Združene države" = "USA",
             "Združeni arabski emirati"="United Arab Emirates",
             "Združeno kraljestvo"= "UK")
-po_drzavah_zem <- po_drzavah_zem %>% mutate(region=slovar[region])
 svet <- left_join(svet, po_drzavah_zem, by="region")
 svet1<- svet %>% filter(!is.na(svet$potniki))
 zemljevid1 <- ggplot(svet, aes(x = long, y = lat, group = group)) +
@@ -121,12 +121,12 @@ zemljevid1 <- ggplot(svet, aes(x = long, y = lat, group = group)) +
         rect = element_blank())
 zemljevid1
 
-
 # GRAF 2: Število potnikov po državah destinacijah
+
 drzave_stolpci <- razvrscene_drzave
 colnames(drzave_stolpci) = c("Država", "Število potnikov")
 rownames(drzave_stolpci)<-1:nrow(drzave_stolpci)
-drzave_stolpci <- drzave_stolpci[-c(16:69),]
+drzave_stolpci <- drzave_stolpci[-c(16:69),] #samo top 10
 graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`)) +
   geom_bar(stat="identity", fill = "blue")+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
@@ -135,8 +135,105 @@ graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`)
   ggtitle("Število potnikov z Brnika v 10 najpogostejših držav med 2004 in 2021")
 graf2
 
-#izbira parih držav, kjer bi predvidevala sezonskost, npr Grčija (poleti več letov), Egipt (kdaj je sezona), Rusija(kdaj je premraz), lahko pa tudi kakšno od top držav, če bo mogoče tam kakšna sezonskost
+# Analiza letalskega potniškega prometa nad ozemlji EU
+
+slovar_kratic <- c("AT"="Austria",
+                   "BE"="Belgium",
+                   "BG"="Bulgaria",
+                   "CH"="Switzerland",
+                   "CY"="Cyprus",
+                   "CZ"="Czech Republic",
+                   "DK"="Denmark",
+                   "EE"="Estonia",
+                   "EL"="Greece",
+                   "FI"="Finland",
+                   "FR"="France",
+                   "HR"="Croatia",
+                   "IE"="Ireland",
+                   "IT"="Italy",
+                   "LV"="Latvia",
+                   "LT"="Lithuania",
+                   "LU"="Luxembourg",
+                   "HU"="Hungary",
+                   "MT"="Malta",
+                   "DE"="Germany",
+                   "NL"="Netherlands",
+                   "NO"="Norway",
+                   "PL"="Poland",
+                   "PT"="Portugal",
+                   "RO"="Romania",
+                   "SK"="Slovakia",
+                   "SI"="Slovenia",
+                   "ES"="Spain",
+                   "SE"="Sweden")
+nad_eu <- ozemlja %>% mutate(drzava=slovar_kratic[drzava])
+povrsine_in_km_nad_ozemlji <- left_join(nad_eu, povrsine, by="drzava")
+povrsine_in_km_nad_ozemlji<- povrsine_in_km_nad_ozemlji %>% filter(!is.na(povrsine_in_km_nad_ozemlji$povrsina_km2))
+povrsine_in_km_nad_ozemlji$"2011" <- as.numeric(povrsine_in_km_nad_ozemlji$"2011")
+povrsine_in_km_nad_ozemlji$"2012" <- as.numeric(povrsine_in_km_nad_ozemlji$"2012")
+povrsine_in_km_nad_ozemlji$"2013" <- as.numeric(povrsine_in_km_nad_ozemlji$"2013")
+povrsine_in_km_nad_ozemlji$"2014" <- as.numeric(povrsine_in_km_nad_ozemlji$"2014")
+povrsine_in_km_nad_ozemlji$"2015" <- as.numeric(povrsine_in_km_nad_ozemlji$"2015")
+povrsine_in_km_nad_ozemlji$"2016" <- as.numeric(povrsine_in_km_nad_ozemlji$"2016")
+povrsine_in_km_nad_ozemlji$"2017" <- as.numeric(povrsine_in_km_nad_ozemlji$"2017")
+povrsine_in_km_nad_ozemlji$"2018" <- as.numeric(povrsine_in_km_nad_ozemlji$"2018")
+povrsine_in_km_nad_ozemlji$"2019" <- as.numeric(povrsine_in_km_nad_ozemlji$"2019")
+povrsine_in_km_nad_ozemlji$"2020" <- as.numeric(povrsine_in_km_nad_ozemlji$"2020")
+povrsine_in_km_nad_ozemlji$povrsina_km2 <- as.numeric(povrsine_in_km_nad_ozemlji$povrsina_km2)
+neki <- povrsine_in_km_nad_ozemlji %>% select(-drzava, -povrsina_km2) %>% mutate(total=rowSums(.)) 
+vsota <- neki$total 
+povprecje <- vsota / povrsine_in_km_nad_ozemlji$povrsina_km2
+povprecje <- as.data.frame(povprecje, encoding = "UTF-8")           #ne vem, kako bi spremenila decimalne pike v vejice v zadnjem stolpcu
+povrsine_in_km_nad_ozemlji <- bind_cols(povrsine_in_km_nad_ozemlji, povprecje)
+za_graf <- select(povrsine_in_km_nad_ozemlji, c(`drzava`, `povprecje`))
+slovar_eu <- c("Austria"="Avstrija",
+            "Belgium"="Belgija",
+            "Bulgaria"="Bolgarija",
+            "Czech Republic"="Češka republika",
+            "Cyprus"="Ciper",
+            "Denmark"= "Danska",
+            "Estonia"="Estonija",
+            "Finland"="Finska",
+            "France"="Francija",
+            "Greece"="Grčija",
+            "Croatia"="Hrvaška",
+            "Ireland"="Irska",
+            "Italy"="Italija",
+            "Latvia"="Latvija",
+            "Lithuania"="Litva",
+            "Luxembourg"="Luksemburg",
+            "Hungary"="Madžarska",
+            "Malta"="Malta",
+            "Germany"= "Nemčija",
+            "Netherlands"="Nizozemska",
+            "Poland"="Poljska",
+            "Portugal"="Portugalska",
+            "Romania"="Romunija",
+            "Slovakia"="Slovaška",
+            "Slovenia"="Slovenija",
+            "Spain"="Španija",
+            "Sweden"="Švedska")
+za_graf <- za_graf %>% mutate(drzava = slovar_eu[drzava])
+
+# GRAF 3: GOSTOTA LETALSKEGA POTNIŠKEGA PROMETA NAD DRŽAVAMI EVROPSKE UNIJE
+
+graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`povprecje`), y=`povprecje`)) +
+  geom_bar(stat="identity", fill = "blue")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
+        axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        panel.grid.major.x = element_blank())+
+  ggtitle("Gostota letalskega potniškega prometa nad državami Evropske unije")
+graf3
+                                                            
+# število potnikov vs. cene kart
+
+
+#analiza potovanj v grčijo - predvidevam sezonskost, ali je opazna. napoved letov v grčijo za eno leto naprej (NAPREDNA ANALIZA)
 
 
 # #Prikaz spreminjanja cen
 # spr_cen <- plot(cene$leto, cene$povpr_cena, main = "Spreminjanje cene povprečne povratne letalske vozovnice za lete znotraj ZDA", xlab="Leto", ylab="Povprečna cena [$]", type="l", col="blue")
+
+
+
