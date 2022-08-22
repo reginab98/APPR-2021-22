@@ -7,7 +7,7 @@ library(shiny)
 library(readr)
 library(dplyr)
 
-install.packages("extrafont")
+#install.packages("extrafont")     #predlogi z interneta, ker je nekaj narobe s fonti
 library(extrafont)
 loadfonts(device = "win")
 
