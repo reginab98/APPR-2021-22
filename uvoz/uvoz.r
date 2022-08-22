@@ -1,6 +1,6 @@
 # 2. faza: Uvoz podatkov
 
-sl <- locale("sl", decimal_mark=",", grouping_mark=".")
+sl <- locale("sl", decimal_mark=",", grouping_mark=".") #zakaj to kdaj random ne dela?
 source("lib/libraries.r", encoding="UTF-8") #kaj je to?
 
 # TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
@@ -37,7 +37,7 @@ link <- "https://en.wikipedia.org/wiki/European_Union"
 stran <- session(link) %>% read_html()
 povrsine <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable plainrowheaders floatright']") %>%
   .[[1]] %>% html_table(dec=".")
-colnames(povrsine) <- c("drzava", "prestolnica", "pridruzitev", "prebivalci", "povrsina",
+colnames(povrsine) <- c("drzava", "pridruzitev", "prebivalci", "povrsina",
                         "gostota", "MEP")
 for (col in c("povrsina", "prebivalci", "gostota")) {
   if (is.character(povrsine[[col]])) {
@@ -49,13 +49,12 @@ for (i in 1:ncol(povrsine)) {         #kaj sem to naredila? od lani, ugotovi! na
     Encoding(povrsine[[i]]) <- "UTF-8"
   }
 }
-povrsine$prestolnica <- NULL   #vseh teh stoplcev ne potrebujem
-povrsine$pridruzitev <- NULL
+povrsine$pridruzitev <- NULL  #vseh teh stoplcev ne potrebujem
 povrsine$prebivalci <- NULL
 povrsine$gostota <- NULL
 povrsine$MEP <- NULL
 povrsine=povrsine[ -c(28), ] #odstranitev zadnje vrstice
-razdeljen_drugi_stolpec <- str_split_fixed(povrsine$povrsina, pattern = "/", 2)
+razdeljen_drugi_stolpec <- str_split_fixed(povrsine$povrsina, pattern = "k", 2)
 stolpca_povrsin <- as.data.frame(razdeljen_drugi_stolpec)
 stolpca_povrsin$V2 <- NULL
 colnames(stolpca_povrsin) = "povrsina_km2"
