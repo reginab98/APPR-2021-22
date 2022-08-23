@@ -1,5 +1,7 @@
 # 3. faza: Vizualizacija podatkov
 
+source("uvoz/uvoz.r", encoding="UTF-8")
+
 #Priprava Tabele 1 za vizualizacijo
 
 odhodi <- filter(odhodi, potniki != "-") # odstranitev vrstic, kjer ni podatka
@@ -112,8 +114,9 @@ slovar <- c("Albanija"="Albania",
             "Združene države" = "USA",
             "Združeni arabski emirati"="United Arab Emirates",
             "Združeno kraljestvo"= "UK")
+po_drzavah_zem <- po_drzavah_zem %>% mutate(region = slovar[region])
 svet <- left_join(svet, po_drzavah_zem, by="region")
-svet1<- svet %>% filter(!is.na(svet$potniki))
+#svet1<- svet %>% filter(!is.na(svet$potniki))
 zemljevid1 <- ggplot(svet, aes(x = long, y = lat, group = group)) +
   scale_fill_gradient(name = "Število potnikov", low = "blue", high = "red", na.value = "grey90")+
   geom_polygon(aes(fill = potniki), color = "black")+
@@ -218,13 +221,13 @@ slovar_eu <- c("Austria"="Avstrija",
             "Spain"="Španija",
             "Sweden"="Švedska")
 za_graf <- za_graf %>% mutate(drzava = slovar_eu[drzava])
+colnames(za_graf)=c("drzava", "Milijon potniških kilometrov na km^2 ozemlja")
 
 # GRAF 3: GOSTOTA LETALSKEGA POTNIŠKEGA PROMETA NAD DRŽAVAMI EVROPSKE UNIJE
 
-graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`povprecje`), y=`povprecje`)) +
+graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`Milijon potniških kilometrov na km^2 ozemlja`), y=`Milijon potniških kilometrov na km^2 ozemlja`)) +
   geom_bar(stat="identity", fill = "blue")+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
-        axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
   ggtitle("Gostota letalskega potniškega prometa nad državami Evropske unije")
@@ -233,43 +236,45 @@ graf3
 # GRAF 4: CENE LETALSKIH KART
 
 cene_graf4 <- cene
-colnames(cene_graf4) = c("Leto", "Povprečna cena")
-graf4 <- ggplot(data=cene_graf4, aes(x=Leto, y=`Povprečna cena`))+
-  geom_bar(stat="identity", fill = "blue")+
-  theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
-        panel.grid.major.x = element_blank())+
+colnames(cene_graf4) = c("Leto", "Povprečna cena[$]")
+graf4 <- ggplot(data= cene_graf4, aes(x=Leto, y=`Povprečna cena[$]`))+
+  geom_line(aes(group=1), color="blue")+
+  geom_point()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
+      panel.grid.major.x = element_blank())+
   ggtitle("Cene letalskih kart")
 graf4
-
+  
 # GRAF 5: ŠTEVILO POTNIKOV IN CENE KART MED 2004 IN 2021
 
-#TO VSE NE BO OKEJ, KER SE NE DA SHRANIT KOT GRAF5, TREBA BO GGPLOT:()
+#TO VSE NE BO OKEJ, KER SE NE DA SHRANIT KOT GRAF5, TREBA BO GGPLOT
+# podatki_cene_potniki <- round(data.frame(leto=2004:2021,            
+#                        potniki_1 = na_leto$potniki,
+#                        cene_2 = cene1$povpr_cena_realna))
+# par(mar = c(5, 4, 4, 4) + 0.3)
+# plot(podatki_cene_potniki$leto,
+#      podatki_cene_potniki$potniki_1,
+#      type = "l",
+#      col = 2,
+#      ylim = c(0, 950000),
+#      xlab = "Leto",
+#      ylab = "Število potnikov",
+#      main = "Primerjava števila potnikov in cen kart med 2004 in 2021")
+# par(new = TRUE)
+# plot(podatki_cene_potniki$leto,
+#      podatki_cene_potniki$cene_2,
+#      type = "l",
+#      col = 4,
+#      axes = FALSE,
+#      xlab = "", 
+#      ylab = "")
+# axis(side = 4, at = pretty(range(podatki_cene_potniki$cene_2)))
+# mtext("Povprečna cena letalske karte", side = 4, line = 3)
 
 cene1 <- cene[-c(1:9),]
 cene1 <- cene1[-c(19),]
 
-podatki_cene_potniki <- round(data.frame(leto=2004:2021,            
-                       potniki_1 = na_leto$potniki,
-                       cene_2 = cene1$povpr_cena_realna))
-par(mar = c(5, 4, 4, 4) + 0.3)
-plot(podatki_cene_potniki$leto,
-     podatki_cene_potniki$potniki_1,
-     type = "l",
-     col = 2,
-     ylim = c(0, 950000),
-     xlab = "Leto",
-     ylab = "Število potnikov",
-     main = "Primerjava števila potnikov in cen kart med 2004 in 2021")
-par(new = TRUE)
-plot(podatki_cene_potniki$leto,
-     podatki_cene_potniki$cene_2,
-     type = "l",
-     col = 4,
-     axes = FALSE,
-     xlab = "", 
-     ylab = "")
-axis(side = 4, at = pretty(range(podatki_cene_potniki$cene_2)))
-mtext("Povprečna cena letalske karte", side = 4, line = 3)
+
 
 
 #Analiza potovanj v Grčijo
