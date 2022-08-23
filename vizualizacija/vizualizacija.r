@@ -23,6 +23,7 @@ options(scipen=5) #da ne bo znanstvenega zapisa na grafih
 
 graf1 <- ggplot(data=na_leto, aes(x=Leto, y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
+  theme_ipsum()+
   theme(panel.grid.major.x = element_blank())+
   ggtitle("Odhodi potnikov z Brnika na leto")
 graf1
@@ -136,6 +137,7 @@ rownames(drzave_stolpci)<-1:nrow(drzave_stolpci)
 drzave_stolpci <- drzave_stolpci[-c(16:69),] #samo top 10
 graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`)) +
   geom_bar(stat="identity", fill = "blue")+
+  theme_ipsum()+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
@@ -227,6 +229,7 @@ colnames(za_graf)=c("drzava", "Milijon potniških kilometrov na km^2 ozemlja")
 
 graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`Milijon potniških kilometrov na km^2 ozemlja`), y=`Milijon potniških kilometrov na km^2 ozemlja`)) +
   geom_bar(stat="identity", fill = "blue")+
+  theme_ipsum()+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
@@ -238,8 +241,8 @@ graf3
 cene_graf4 <- cene
 colnames(cene_graf4) = c("Leto", "Povprečna cena[$]")
 graf4 <- ggplot(data= cene_graf4, aes(x=Leto, y=`Povprečna cena[$]`))+
-  geom_line(aes(group=1), color="blue")+
-  geom_point()+
+  geom_line(aes(group=1), size=1, color="blue")+
+  theme_ipsum()+
   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
       panel.grid.major.x = element_blank())+
   ggtitle("Cene letalskih kart")
@@ -247,38 +250,21 @@ graf4
   
 # GRAF 5: ŠTEVILO POTNIKOV IN CENE KART MED 2004 IN 2021
 
-#TO VSE NE BO OKEJ, KER SE NE DA SHRANIT KOT GRAF5, TREBA BO GGPLOT
-# podatki_cene_potniki <- round(data.frame(leto=2004:2021,            
-#                        potniki_1 = na_leto$potniki,
-#                        cene_2 = cene1$povpr_cena_realna))
-# par(mar = c(5, 4, 4, 4) + 0.3)
-# plot(podatki_cene_potniki$leto,
-#      podatki_cene_potniki$potniki_1,
-#      type = "l",
-#      col = 2,
-#      ylim = c(0, 950000),
-#      xlab = "Leto",
-#      ylab = "Število potnikov",
-#      main = "Primerjava števila potnikov in cen kart med 2004 in 2021")
-# par(new = TRUE)
-# plot(podatki_cene_potniki$leto,
-#      podatki_cene_potniki$cene_2,
-#      type = "l",
-#      col = 4,
-#      axes = FALSE,
-#      xlab = "", 
-#      ylab = "")
-# axis(side = 4, at = pretty(range(podatki_cene_potniki$cene_2)))
-# mtext("Povprečna cena letalske karte", side = 4, line = 3)
-
 cene1 <- cene[-c(1:9),]
 cene1 <- cene1[-c(19),]
-
-
-
+podatki_cene_potniki <- bind_cols(data.frame(leto=2004:2021), `Število potnikov` = na_leto$`Število potnikov`, `Povprečna cena` = cene1$povpr_cena_realna)
+names(podatki_cene_potniki)[1] <- "Leto"
+koef <- max(podatki_cene_potniki$`Število potnikov`) / max(podatki_cene_potniki$`Povprečna cena`)
+graf5 <- ggplot(podatki_cene_potniki, aes(x=Leto))+
+  geom_line(aes(y = `Število potnikov`), size=1, color="blue")+
+  geom_line(aes(y = `Povprečna cena` * koef), size=1, color="red")+
+  scale_y_continuous(name = "Število potnikov", sec.axis=sec_axis(~./koef, name = "Povprečna cena"))+
+  theme_ipsum()+
+  ggtitle("Primerjava števila potnikov in cen kart")
+graf5
 
 #Analiza potovanj v Grčijo
-grcija_vse <- filter(dejanski_odhodi, drzava == "Grčija")
+grcija_vse <- filter(odhodi, drzava == "Grčija")
 
 #predvidevam sezonskost, ali je opazna
 # Napoved letov v grčijo za eno leto naprej = NAPREDNA ANALIZA
