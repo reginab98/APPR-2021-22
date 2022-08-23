@@ -266,16 +266,16 @@ graf5
 #Analiza potovanj v Grčijo
 grcija_vse <- filter(odhodi, drzava == "Grčija")
 grcija_vse$Mesec <- as.yearmon(paste(grcija_vse$leto, grcija_vse$mesec), "%Y %m")
-grcija_10 <- grcija_vse %>% slice(37:168)
+grcija_10 <- grcija_vse %>% slice(61:192)
 names(grcija_10)[4] <- "Število potnikov"
 
-# GRAF 6: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2007 IN 2017 - 11 LET
+# GRAF 6: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2009 IN 2019 - 11 LET
 graf6 <- ggplot(data= grcija_10, aes(x=Mesec, y=`Število potnikov`))+
   geom_line(aes(group=1), size=1, color="blue")+
   theme_ipsum()+
   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
         panel.grid.major.x = element_blank())+
-  ggtitle("Število mesečnih odhodov v Grčijo 2007-2017")
+  ggtitle("Število mesečnih odhodov v Grčijo 2009-2019")
 graf6
 
 # GRAF 7: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2015 IN 2017 - 3 LETA
