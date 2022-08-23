@@ -11,7 +11,7 @@ library(dplyr)
 library(extrafont)
 loadfonts(device = "win")
 
-
+library(patchwork) #da lahko združim dva ggplota
 
 
 library(xml2)
