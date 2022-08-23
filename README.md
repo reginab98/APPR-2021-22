@@ -1,10 +1,6 @@
 # Analiza potovanj iz Slovenije
 Regina Blagotinšek
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2021/22
-
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/main?urlpath=rstudio) RStudio
-
 ## Tematika in plan dela
 
 V projektni nalogi bom analizirala potovanja iz Slovenije. Osredotočila se bom na potovanja z letali. Najprej me bo zanimalo, kam letijo potniška letala z ljubljanskega letališča. Ker je ljubljansko letališče manjše, to pogosto niso podatki o končni destinaciji. Vseeno bom pogledala, kako se skozi čas spreminja število potnikov na različne destinacije v zadnjih desetih letih. Podatke bom za nekaj let analizirala tudi na mesečni ravni in skušala najti kakšne podobnosti, kot na primer, v katerem mesecu so potovanja v določeno državo najpogostejša. Preučila bom tudi, ali imajo povprečne cene letalskih kart kakšen vpliv na število potnikov. Podatke o cenah kart so sicer za ZDA, vendar bom morda vseeno našla kakšno povezavo. Potovanja z letali iz Slovenije bom prikazala tudi na zemljevidu sveta. Na koncu bom nekoliko analizirala tudi letalski potniški promet v Evropski uniji in sicer tako, da bom preučila, koliko kilometrov naredijo potniška letala preko posameznih držav EU v razmerju s površinami njihovih ozemelj.
