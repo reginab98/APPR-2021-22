@@ -3,7 +3,7 @@ Regina Blagotinšek
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2021/22
 
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/master?urlpath=rstudio) RStudio
+* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/main?urlpath=rstudio) RStudio
 
 ## Tematika in plan dela
 
