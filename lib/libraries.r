@@ -13,6 +13,7 @@ loadfonts(device = "win")
 
 library(patchwork) #da lahko združim dva ggplota
 
+library(hrbrthemes)
 
 library(xml2)
 
