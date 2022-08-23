@@ -1,7 +1,7 @@
 # 2. faza: Uvoz podatkov
 
-sl <- locale("sl", decimal_mark=",", grouping_mark=".") #zakaj to kdaj random ne dela?
 source("lib/libraries.r", encoding="UTF-8") #kaj je to?
+sl <- locale("sl", decimal_mark=",", grouping_mark=".") #zakaj to kdaj random ne dela? najprej source libraries in dela
 
 # TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
 
