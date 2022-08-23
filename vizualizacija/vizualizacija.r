@@ -24,7 +24,9 @@ options(scipen=5) #da ne bo znanstvenega zapisa na grafih
 graf1 <- ggplot(data=na_leto, aes(x=Leto, y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
   theme_ipsum()+
-  theme(panel.grid.major.x = element_blank())+
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 0.5),
+    panel.grid.major.x = element_blank())+
   ggtitle("Odhodi potnikov z Brnika na leto")
 graf1
 

@@ -12,7 +12,6 @@ runtime: shiny
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
-
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding="UTF-8")
 ```
@@ -22,27 +21,9 @@ source("lib/libraries.r", encoding="UTF-8")
 source("lib/rstudio.r", encoding="UTF-8")
 ```
 
-# Izbira teme
-
-na koncu skopiraj kar je v readme.md
-
-![](slike/brnik.jpg)
-***
-
-# Obdelava, uvoz in čiščenje podatkov
-
-```{r uvoz}
-source("uvoz/uvoz.r", encoding="UTF-8")
-```
-
-
-
-***
-
-
 ## Izbira teme
+Izbrala sem si temo potovanj iz Slovenije. V projektni nalogi sem analizirala potovanja iz Slovenije. Osredotočila sem se na potovanja z letali. Najprej me je zanimalo, koliko potnikov leti z ljubljanskega letališča in kam. Nato sem skušala najti povezavo med cenami letalskih kart in številom potnikov. Ogledala sem si tudi gostoto letališkega potniškega prometa nad ozemlji držav Evropske unije. Na koncu pa sem nekoliko podrobneje analizirala potovanja v Grčijo.
 
-***
 
 ## Obdelava, uvoz in čiščenje podatkov
 
@@ -50,7 +31,31 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-***
+V drugi fazi projekta sem uvozila sledeče podatkovne tabele:
+
+TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljubljana, Letališče Jožeta Pučnika, mesečno
+* oblika CSV
+* vrstice: meseci za nekaj let
+* stolpci: države
+* vir: [Statistični urad](<https://pxweb.stat.si/SiStatData/pxweb/sl/Data/-/2221901S.px>)
+
+TABELA 2: Povprečne cene letalskih kart
+* oblika XLSX
+* vrstice: leta
+* stolpci: povprečne cene realne cene, spremembe glede na prejšnje leto, povprečne cene nominalne cene, spremembe glede na začetno leto (1995)
+* vir: [Bureau of Transportation Statistics](<https://www.bts.gov/content/annual-us-domestic-average-itinerary-fare-current-and-constant-dollars>)
+
+TABELA 3: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijoni potniških km
+* oblika: CSV
+* stolpci: evropske države
+* vrstice: leta
+* vir: [Eurostat](<https://ec.europa.eu/eurostat/databrowser/view/avia_tppa/default/table?lang=en>)
+
+TABELA 4: Površine evropskih držav
+* oblika HTML
+* vrstice: države
+* stolpci: površine držav
+* vir: [Wikipedija](<https://en.wikipedia.org/wiki/European_Union>)
 
 ## Analiza in vizualizacija podatkov
 
@@ -58,7 +63,18 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-***
+Prvi graf prikazuje število vseh potnikov na leto, ki so z Brnika odleteli med 2004 in 2021. Opazimo vpliv epidemije koronavirusa v zadnjih dveh letih, saj sta zadnje dva stolpca bistveno nižja od ostalih.
+```{r graf1, fig.align='center', out.width = "70%"}
+graf1
+```
+Na spodnjem zemljevidu je prikazano število potnikov, ki so z Brnika odleteli v posamezne države med 2004 in 2021. V sivo obarvane države ni letel nihče, najmanj jih je v modro obarvane, največ pa v rdeče.
+```{r zemljevid1, fig.align='center', out.width = "100%"}
+zemljevid1
+```
+Na naslednjem grafu je po številu potnikov razvrščenih 10 držav, kamor je letelo največ potnikov.
+```{r graf2, fig.align='center', out.width = "70%"}
+graf2
+```
 
 ## Napredna analiza podatkov
 
