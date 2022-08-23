@@ -3,7 +3,6 @@ Regina Blagotinšek
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2021/22
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/master?urlpath=shiny/APPR-2021-22/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/reginab98/APPR-2021-22/master?urlpath=rstudio) RStudio
 
 ## Tematika in plan dela
@@ -19,9 +18,9 @@ TABELA 1: Letališki potniški promet glede na odhod letal ter po državah, Ljub
 * vir: https://pxweb.stat.si/SiStatData/pxweb/sl/Data/-/2221901S.px
 
 TABELA 2: Povprečne cene letalskih kart
-* oblika CSV
+* oblika XSLX
 * vrstice: leta
-* stolpci: povprečne cene, spremembe glede na prejšnje leto, spremembe glede na začetno leto (1995)
+* stolpci: povprečne realne cene, povprečne nominalnecene, spremembe glede na prejšnje leto, spremembe glede na začetno leto (1995)
 * vir: https://www.bts.gov/content/annual-us-domestic-average-itinerary-fare-current-and-constant-dollars
 
 TABELA 3: Letalski potniški promet nad ozemljem in teritorialnim morjem držav - milijoni potniških km
