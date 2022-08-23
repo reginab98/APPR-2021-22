@@ -14,7 +14,7 @@ grcija_meseci <- aggregate(x = grcija_do_19$potniki,
 colnames(grcija_meseci) <- c("Mesec", "Število potnikov")
 graf8 <- ggplot(data=grcija_meseci, aes(x=Mesec, y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=10)+
   theme(panel.grid.major.x = element_blank())+
   ggtitle("Odhodi potnikov z Brnika v Grčijo v letu 2020, če ne bi bilo epidemije koronavirusa")
 graf8

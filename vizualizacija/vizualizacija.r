@@ -23,7 +23,7 @@ options(scipen=5) #da ne bo znanstvenega zapisa na grafih
 
 graf1 <- ggplot(data=na_leto, aes(x=Leto, y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   theme(
     axis.text.x = element_text(angle = 90, hjust = 0.5),
     panel.grid.major.x = element_blank())+
@@ -123,7 +123,7 @@ svet <- left_join(svet, po_drzavah_zem, by="region")
 zemljevid1 <- ggplot(svet, aes(x = long, y = lat, group = group)) +
   scale_fill_gradient(name = "Število potnikov", low = "blue", high = "red", na.value = "grey90")+
   geom_polygon(aes(fill = potniki), color = "black")+
-  theme(axis.text.x = element_blank(),
+  theme(axis.text = element_blank(),
         axis.line.y = element_blank(),
         axis.ticks = element_blank(),
         axis.title.x = element_blank(),
@@ -140,7 +140,7 @@ drzave_stolpci <- drzave_stolpci[-c(16:69),] #samo top 10
 
 graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
@@ -232,7 +232,7 @@ colnames(za_graf)=c("drzava", "Milijon potniških kilometrov na km^2 ozemlja")
 
 graf3 <- ggplot(data=za_graf, aes(x=reorder(drzava,-`Milijon potniških kilometrov na km^2 ozemlja`), y=`Milijon potniških kilometrov na km^2 ozemlja`)) +
   geom_bar(stat="identity", fill = "blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=12)+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
@@ -245,7 +245,7 @@ cene_graf4 <- cene
 colnames(cene_graf4) = c("Leto", "Povprečna cena[$]")
 graf4 <- ggplot(data= cene_graf4, aes(x=Leto, y=`Povprečna cena[$]`))+
   geom_line(aes(group=1), size=1, color="blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
       panel.grid.major.x = element_blank())+
   ggtitle("Cene letalskih kart")
@@ -262,7 +262,7 @@ graf5 <- ggplot(podatki_cene_potniki, aes(x=Leto))+
   geom_line(aes(y = `Število potnikov`), size=1, color="blue")+
   geom_line(aes(y = `Povprečna cena` * koef), size=1, color="red")+
   scale_y_continuous(name = "Število potnikov", sec.axis=sec_axis(~./koef, name = "Povprečna cena"))+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   ggtitle("Primerjava števila potnikov in cen kart")
 graf5
 
@@ -275,7 +275,7 @@ names(grcija_10)[4] <- "Število potnikov"
 # GRAF 6: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2009 IN 2019 - 11 LET
 graf6 <- ggplot(data= grcija_10, aes(x=Mesec, y=`Število potnikov`))+
   geom_line(aes(group=1), size=1, color="blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
         panel.grid.major.x = element_blank())+
   ggtitle("Število mesečnih odhodov v Grčijo 2009-2019")
@@ -285,7 +285,7 @@ graf6
 grcija_3 <- grcija_10 %>% slice(97:132)
 graf7 <- ggplot(data= grcija_3, aes(x=Mesec, y=`Število potnikov`))+
   geom_line(aes(group=1), size=1, color="blue")+
-  theme_ipsum()+
+  theme_ipsum(plot_title_size=16)+
   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
         panel.grid.major.x = element_blank())+
   ggtitle("Število mesečnih odhodov v Grčijo 2015-2017")
