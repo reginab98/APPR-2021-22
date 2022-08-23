@@ -137,7 +137,8 @@ drzave_stolpci <- razvrscene_drzave
 colnames(drzave_stolpci) = c("Država", "Število potnikov")
 rownames(drzave_stolpci)<-1:nrow(drzave_stolpci)
 drzave_stolpci <- drzave_stolpci[-c(16:69),] #samo top 10
-graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`)) +
+
+graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`), y=`Število potnikov`))+
   geom_bar(stat="identity", fill = "blue")+
   theme_ipsum()+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
