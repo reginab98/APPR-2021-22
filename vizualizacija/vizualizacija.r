@@ -143,7 +143,7 @@ graf2 <- ggplot(data=drzave_stolpci, aes(x=reorder(Država,-`Število potnikov`)
   theme(axis.text.x = element_text(angle = 90, hjust = 0.3),
         axis.title.x = element_blank(),
         panel.grid.major.x = element_blank())+
-  ggtitle("Število potnikov z Brnika v 10 najpogostejših držav med 2004 in 2021")
+  ggtitle("Deset najpogosteje obiskanih držav")
 graf2
 
 # Analiza letalskega potniškega prometa nad ozemlji EU
