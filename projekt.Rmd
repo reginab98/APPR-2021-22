@@ -22,7 +22,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 ```
 
 ## Izbira teme
-Izbrala sem si temo potovanj iz Slovenije. V projektni nalogi sem analizirala potovanja iz Slovenije. Osredotočila sem se na potovanja z letali. Najprej me je zanimalo, koliko potnikov leti z ljubljanskega letališča in kam. Nato sem skušala najti povezavo med cenami letalskih kart in številom potnikov. Ogledala sem si tudi gostoto letališkega potniškega prometa nad ozemlji držav Evropske unije. Na koncu pa sem nekoliko podrobneje analizirala potovanja v Grčijo.
+V projektni nalogi sem analizirala potovanja iz Slovenije. Osredotočila sem se na potovanja z letali. Najprej me je zanimalo, koliko potnikov leti z ljubljanskega letališča in kam. Nato sem skušala najti povezavo med cenami letalskih kart in številom potnikov. Ogledala sem si tudi gostoto letališkega potniškega prometa nad ozemlji držav Evropske unije. Na koncu pa sem nekoliko podrobneje analizirala potovanja v Grčijo.
 
 
 ## Obdelava, uvoz in čiščenje podatkov
@@ -99,25 +99,26 @@ Na četrtem grafu je prikazana primerjava števila potnikov (modro) in povprečn
 ```{r graf5, fig.align='center', out.width = "70%"}
 graf5
 ```
-Med obdelavo podatkov sem opazila, da je za nekatere države opazna sezonskost. Primer je Grčija. Spodaj je na petem grafu prikazano število mesečnih odhodov v Grčijo za obdobje enajstih let. Vsako leto je očitno povečano število potnikov nekje sredi koledarskega leta. Na šestem grafu pa so od bližje prikazana tri leta in opazimo, da je povečano število potnikov v poletnih mesecih, kar je skladno s tem, da veliko potnikov z Brnika poleti tam dopustuje.
-```{r graf6, fig.align='center', out.width = "70%"}
-graf6
-```
-
-```{r graf7, fig.align='center', out.width = "70%"}
-graf7
-```
 
 ## Napredna analiza podatkov
 
 ```{r analiza}
 source("analiza/analiza.r", encoding="UTF-8")
 ```
-Za odhode potnikov v Grčijo sem imela podatke do sredine leta 2022, vendar je imela zadnje tri leta epidemija koronavirusa zelo velik vpliv na število potnikov. Iz podatkov do leta 2019 sem ocenila, koliko potnikov bi po mesecih v letu 2020 odletelo z Brnika, če ne bi bilo epidemije. Rezultati so spodaj prikazani na sedmem grafu.
-```{r graf8, fig.align='center', out.width = "70%"}
-graf8
+Med obdelavo podatkov sem opazila, da je za nekatere države opazna sezonskost. Primer je Grčija. V tem delu projektne naloge sem podatke po mesecih pretvorila v časovno vrsto, saj to odpre veliko možnosti za analizo in napovedovanje. Spodaj je na petem grafu prikazano število potnikov skozi vsa leta med 2004 in 2019. Vsako leto se pojavi zelo visoka špica nekje sredi leta.
+```{r graf9, fig.align='center', out.width = "70%"}
+graf9
+```
+Vidimo, da je prisotna sezonskost. To se zelo dobro vidi na šestem grafu.
+```{r graf10, fig.align='center', out.width = "70%"}
+graf10
+```
+
+Za odhode potnikov v Grčijo sem imela podatke do sredine leta 2022, vendar je imela zadnje tri leta epidemija koronavirusa zelo velik vpliv na število potnikov. Odločila sem se, da bom iz podatkov do leta 2019 ocenila, koliko potnikov bi po mesecih odhajalo v Grčijo do konca leta 2023, če ne bi bilo epidemije koronavirusa. Najprej sem poiskala najprimernejši model za podatke. To je bil ARIMA model. Nato pa sem napovedala podatke za naslednjih 48 mesecev, torej do konca leta 2023. Rezultati so na sedmem grafu, spodaj.
+```{r graf12, fig.align='center', out.width = "70%"}
+graf12
 ```
 
 ## Zaključek
 
-Tekom projektne naloge sem izvedela veliko novih informacij o letalskemu potniškemu prometu iz Slovenije. Ideja za nadaljno analizo bi bila na primer izbrati podatke o končnih destinacijah potnikov, ki odletijo z Brnika, saj je to manjše letališče in v veliko primerih potniki letijo do kakšnega večjega letališča in od tam do končne destinacije. Tako bi lahko zares analizirali, kam potujejo potniki z ljubljanskega letališča.
+Tekom projektne naloge sem izvedela veliko novih informacij o letalskem potniškem prometu iz Slovenije. Ideja za nadaljno analizo bi bila na primer izbrati podatke o končnih destinacijah potnikov, ki odletijo z Brnika, saj je to manjše letališče in v veliko primerih potniki letijo do kakšnega večjega letališča in od tam do končne destinacije. Tako bi lahko zares analizirali, kam potujejo potniki z ljubljanskega letališča.
