@@ -46,30 +46,31 @@ graf11
 # x_t = x_{t-s} + e_t <- pomen: vrednost v januarju je enaka vrednosti iz januarja predhodnega leta + neka naključna napaka (e_t).
 # To metodo lahko uporabimo, ker imamo zelo očitno sezonskost.
 fit <- snaive(x) #Iz summary odčitana vrednost standardnega odklona: Residual SD = 959.1274. Toliko je standardni odklon od tega, da smo rekli, da je vrednost v nekem mesecu enaka vrednosti v tem mesecu eno leto nazaj.
-print(summary(fit))
-checkresiduals(fit)
+#print(summary(fit))
+#checkresiduals(fit)
 #Glede na acf graf to ni najbolj idealna metoda, ker kar nekaj črtic gleda ven iz modrega pasu (95% interval zaupanja).
 
 #2. MODEL: FIT ETS METHOD
 # R preizkusi vse exponential smoothing modele in vrne najboljšega.
 fit_ets <- ets(x)     #sigma = Residual SD = 961.8926
-print(summary(fit_ets))
-checkresiduals(fit_ets)  # Glede na acf ne izgleda bolje, zdi se mi celo slabše. Tudi SD je večji.
+#print(summary(fit_ets))
+#checkresiduals(fit_ets)  # Glede na acf ne izgleda bolje, zdi se mi celo slabše. Tudi SD je večji.
 
 # 3. MODEL: ARIMA MODEL
 # Tudi tukaj R preizkusi vse ARIMA modele in izbere najboljšega.
-fit_arima <- auto.arima(x, D=1, stepwise=FALSE, approximation = FALSE, trace= TRUE) #d=1 bi naredil isto kot df za trend, D=1 naredi to za sezonskost, torej prvo razliko, zato da se znebimo sezonskosti. To pa moramo zato, ker za ARIMA potrebujemo stacionarno časovno vrsto.
-print(summary(fit_arima))   # Residual SD = 737.2191 <- Boljši od prejšnjih dveh.
-checkresiduals(fit_arima)   # Tudi acf izgleda najboljši od vseh treh, še vedno pa jih je nekaj (samo 3) zunaj intervala zaupanja, tako da zagotovo obstaja boljši model, ki pa je najverjetneje zelo kompleksen.
+#fit_arima <- auto.arima(x, D=1, stepwise=FALSE, approximation = FALSE, trace= FALSE) #d=1 bi naredil isto kot df za trend, D=1 naredi to za sezonskost, torej prvo razliko, zato da se znebimo sezonskosti. To pa moramo zato, ker za ARIMA potrebujemo stacionarno časovno vrsto.
+#print(summary(fit_arima))   # Residual SD = 737.2191 <- Boljši od prejšnjih dveh.
+#checkresiduals(fit_arima)   # Tudi acf izgleda najboljši od vseh treh, še vedno pa jih je nekaj (samo 3) zunaj intervala zaupanja, tako da zagotovo obstaja boljši model, ki pa je najverjetneje zelo kompleksen.
 # Izbran: Best model: ARIMA(1,0,2)(0,1,0)[12] 
-
+# Vse zgoraj je zakomentirano, ker se drugače vsakič znova poganja in išče ARIMA model, kar traja.
+model <- Arima(x, order=c(1, 0, 2), seasonal=c(0, 1, 0))
 # Torej: Od vseh treh, ki smo jih preizkusili, je najboljši model ARIMA.
 
 # NAPOVED
 #Napoved je narejena glede na podatke do konca 2019. Privzamemo, da ni bilo epidemije koronavirusa.
 
-napoved <- forecast(fit_arima, h=48) #Napoved za 48 mesecev, torej do konca leta 2023.
-print(summary(napoved)) #prikaže napovedi
+napoved <- forecast(model, h=48) #Napoved za 48 mesecev, torej do konca leta 2023.
+#print(summary(napoved)) #prikaže napovedi
 
 graf12 <- autoplot(napoved, include=120)+    #Samo zadnjih 120 mesecev, torej 10 let, da se bolje vidi.
   ggtitle("Napoved odhodov v Grčijo do konca leta 2023 glede na podatke do konca leta 2019")+
