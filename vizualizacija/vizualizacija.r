@@ -272,24 +272,24 @@ grcija_vse$Mesec <- as.yearmon(paste(grcija_vse$leto, grcija_vse$mesec), "%Y %m"
 grcija_10 <- grcija_vse %>% slice(61:192)
 names(grcija_10)[4] <- "Število potnikov"
 
-# GRAF 6: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2009 IN 2019 - 11 LET
-graf6 <- ggplot(data= grcija_10, aes(x=Mesec, y=`Število potnikov`))+
-  geom_line(aes(group=1), size=1, color="blue")+
-  theme_ipsum(plot_title_size=16)+
-  theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
-        panel.grid.major.x = element_blank())+
-  ggtitle("Število mesečnih odhodov v Grčijo 2009-2019")
-graf6
+# To vse sem izločila, ker sem v 4. fazi naredila bolje in se tudi lepše vidi.
+# # GRAF 6: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2009 IN 2019 - 11 LET
+# graf6 <- ggplot(data= grcija_10, aes(x=Mesec, y=`Število potnikov`))+
+#   geom_line(aes(group=1), size=1, color="blue")+
+#   theme_ipsum(plot_title_size=16)+
+#   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
+#         panel.grid.major.x = element_blank())+
+#   ggtitle("Število mesečnih odhodov v Grčijo 2009-2019")
+# graf6
+# 
+# # GRAF 7: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2015 IN 2017 - 3 LETA
+# grcija_3 <- grcija_10 %>% slice(97:132)
+# graf7 <- ggplot(data= grcija_3, aes(x=Mesec, y=`Število potnikov`))+
+#   geom_line(aes(group=1), size=1, color="blue")+
+#   theme_ipsum(plot_title_size=16)+
+#   theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
+#         panel.grid.major.x = element_blank())+
+#   ggtitle("Število mesečnih odhodov v Grčijo 2015-2017")
+# graf7
 
-# GRAF 7: ŠTEVILO ODHODOV V GRČIJO NA MESEC MED 2015 IN 2017 - 3 LETA
-grcija_3 <- grcija_10 %>% slice(97:132)
-graf7 <- ggplot(data= grcija_3, aes(x=Mesec, y=`Število potnikov`))+
-  geom_line(aes(group=1), size=1, color="blue")+
-  theme_ipsum(plot_title_size=16)+
-  theme(axis.text.x = element_text(angle = 60, hjust = 0.7),
-        panel.grid.major.x = element_blank())+
-  ggtitle("Število mesečnih odhodov v Grčijo 2015-2017")
-graf7
-
-# Napoved odhodov v Grčijo za eno leto naprej -> NAPREDNA ANALIZA
 
