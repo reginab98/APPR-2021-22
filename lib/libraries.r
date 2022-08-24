@@ -16,6 +16,8 @@ library(patchwork) #da lahko združim dva ggplota
 library(hrbrthemes) # za lepse grafe ggplot
 library(zoo) # za datume yearmon
 
+library(fpp2) #za napredno analizo - napovedovanje
+
 library(xml2)
 
 library(XML)
